@@ -3,9 +3,9 @@ use std::pin::Pin;
 use std::task::Context;
 use std::task::Poll;
 
-use futures::channel::mpsc as fmpsc;
 use futures::Stream;
 use futures::StreamExt;
+use futures::channel::mpsc as fmpsc;
 use smart_string::DisplayExt;
 use smart_string::SmartString;
 use url::Url;

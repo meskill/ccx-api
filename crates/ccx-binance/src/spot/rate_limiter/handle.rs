@@ -1,6 +1,6 @@
+use futures::SinkExt;
 use futures::channel::mpsc;
 use futures::channel::oneshot;
-use futures::SinkExt;
 
 use crate::spot::rate_limiter::actor::RateLimiterActor;
 use crate::spot::rate_limiter::error::RateLimiterError;

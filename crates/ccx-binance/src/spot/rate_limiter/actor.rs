@@ -1,13 +1,13 @@
 use std::collections::HashMap;
 use std::time::Duration;
 
-use futures::channel::mpsc;
 use futures::StreamExt;
+use futures::channel::mpsc;
 use strum::IntoEnumIterator;
 use tokio::select;
-use tokio::time::interval;
 use tokio::time::Instant;
 use tokio::time::MissedTickBehavior;
+use tokio::time::interval;
 
 use crate::spot::rate_limiter::queue::Queue;
 use crate::spot::rate_limiter::types::RateLimiterMessage;
