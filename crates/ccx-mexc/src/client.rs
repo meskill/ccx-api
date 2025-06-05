@@ -70,11 +70,7 @@ where
 {
     let meta = MexcResponseMeta::from_response(&resp);
     if resp.status().is_success() {
-        let is_json = resp
-            .headers()
-            .get(http::header::CONTENT_TYPE)
-            .map(|c| c == &"application/json")
-            .unwrap_or_default();
+        let is_json = is_json_response(&resp);
         let full = resp.bytes().await?;
 
         tracing::trace!("Response: {}", String::from_utf8_lossy(&full));
