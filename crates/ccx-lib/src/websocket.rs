@@ -4,6 +4,7 @@ use smart_string::{DisplayExt, PascalString};
 use soketto::connection::Builder;
 use soketto::handshake::Client;
 use soketto::handshake::ServerResponse;
+use soketto::handshake::client::Header;
 use tokio::net::TcpStream;
 use tokio_rustls::TlsConnector;
 use tokio_rustls::client::TlsStream;
@@ -33,9 +34,11 @@ pub enum WebSocketConnectError {
     Rejected { status_code: u16 },
 }
 
+#[bon::builder]
 #[tracing::instrument(skip_all, fields(stream_url = %stream_url))]
 pub async fn websocket_builder(
     stream_url: &Url,
+    headers: Option<&[Header<'_>]>,
 ) -> Result<Builder<Compat<TlsStream<TcpStream>>>, WebSocketConnectError> {
     tracing::debug!("Establishing connection to {stream_url}");
 
@@ -76,6 +79,10 @@ pub async fn websocket_builder(
 
     tracing::debug!("requesting {host}, {resource}");
     let mut client = Client::new(stream.compat(), &host, &resource);
+
+    if let Some(headers) = headers {
+        client.set_headers(headers);
+    }
 
     match client.handshake().await? {
         ServerResponse::Accepted { .. } => Ok(client.into_builder()),
