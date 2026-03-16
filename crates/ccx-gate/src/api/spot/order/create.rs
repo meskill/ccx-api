@@ -38,7 +38,7 @@ pub struct CreateOrder {
     pub price: Option<Decimal>,
 
     /// Time in force for the order (e.g., gtc, ioc, poc, fok). Optional.
-    time_in_force: Option<TimeInForce>,
+    pub time_in_force: Option<TimeInForce>,
 
     /// The amount to display for iceberg orders. Null or 0 for normal orders. Optional.
     pub iceberg: Option<Decimal>,

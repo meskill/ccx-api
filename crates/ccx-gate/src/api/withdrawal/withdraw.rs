@@ -59,26 +59,26 @@ impl SignedRequest for Withdraw {}
 #[derive(Debug, Clone, PartialEq, Deserialize, Builder)]
 pub struct WithdrawResponse {
     /// Record ID
-    id: SmartString,
+    pub id: SmartString,
     /// Hash record of the withdrawal
-    txid: Option<SmartString<64>>,
+    pub txid: Option<SmartString<64>>,
     /// Client order id, up to 32 length and can only include 0-9, A-Z, a-z, underscore(_), hyphen(-) or dot(.)
-    withdraw_order_id: Option<SmartString<32>>,
+    pub withdraw_order_id: Option<SmartString<32>>,
     /// Operation time
     #[serde_as(as = "Option<TimestampSeconds<i64, Flexible>>")]
-    timestamp: Option<DateTime<Utc>>,
+    pub timestamp: Option<DateTime<Utc>>,
     /// Currency amount
-    amount: Decimal,
+    pub amount: Decimal,
     /// Currency name
-    currency: SmartString,
+    pub currency: SmartString,
     /// Withdrawal address. Required for withdrawals
-    address: SmartString<66>,
+    pub address: SmartString<66>,
     /// Additional remarks with regards to the withdrawal
-    memo: Option<SmartString>,
+    pub memo: Option<SmartString>,
     /// Record status.
-    status: WithdrawalWithdrawStatus,
+    pub status: WithdrawalWithdrawStatus,
     /// Name of the chain used in withdrawals
-    chain: SmartString,
+    pub chain: SmartString,
 }
 
 impl Response for WithdrawResponse {}
